@@ -1,6 +1,5 @@
 import moviepy.editor
 import os
-import random
 
 
 class AudioDelimeter(object):
@@ -24,7 +23,10 @@ class AudioDelimeter(object):
 
 
 def remove_files() -> None:
-    pass
+    for root, dirs, files in os.walk('.'):
+        for file in files:
+            if (file.endswith('.mp3') and root == '.') or (file.endswith('.mp4') and root == '.'):
+                os.remove(file)
 
 
 def open_mp3() -> str:
@@ -32,4 +34,5 @@ def open_mp3() -> str:
         for file in files:
             if file.endswith('.mp3') and root == '.':
                 return str(file)
+
 
