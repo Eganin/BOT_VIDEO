@@ -1,3 +1,4 @@
+# - *- coding: utf- 8 - *-
 import logging
 import text_bot as tb
 import os
@@ -7,6 +8,7 @@ from upload_video import UploadVideo
 from audio import AudioDelimeter, remove_files, open_mp3
 from database import SQLither
 from handlers import handler_data_user
+
 
 load_dotenv()  # download .env
 
