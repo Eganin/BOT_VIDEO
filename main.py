@@ -8,7 +8,6 @@ from audio import AudioDelimeter, remove_files, open_mp3
 from database import SQLither
 from handlers import handler_data_user
 
-
 load_dotenv()  # download .env
 
 TOKEN = str(os.getenv('TG_TOKEN'))  # Token BY BotherFather
@@ -41,10 +40,11 @@ async def users_info(message: types.Message) -> None:
         if len(data) < 1:
             await message.answer(tb.CLEAR_DB)
 
-        await message.answer(tb.DATA_USERS)
-        for k, v in data.items():
-            for result in v:
-                await message.answer(f'user_id={k}:Видео={result}')
+        else:
+            await message.answer(tb.DATA_USERS)
+            for k, v in data.items():
+                for result in v:
+                    await message.answer(f'user_id={k}:Видео={result}')
     except:
         await message.answer('Произошда ошибка во время обращения к базе данных')
 
@@ -94,14 +94,11 @@ async def to_accept_url_user(message: types.Message) -> None:
 
 @dp.message_handler(lambda message: message)
 async def delete_other(message: types.message):
-    try:
-        user_id = message.from_user.id
-        text = message.text
-        database.delete_user(user_id, text)
-        await message.answer(tb.DELETE_COMPLETE)
+    user_id = message.from_user.id
+    text = message.text
 
-    except:
-        await message.answer('Произошда ошибка во время обращения к базе данных')
+    database.delete_user(user_id, text)
+    await message.answer(tb.DELETE_COMPLETE)
 
 
 if __name__ == '__main__':
